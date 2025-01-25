@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuracion</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    
+
+    <label for="presetColors" class="c">Colores Predefinidos:</label>
+    <select id="presetColors" onchange="applyPresetColor()" class="c">
+        <option value="">Selecciona un color...</option>
+        <option value="background-#671a81-text-#ffffff-svg-#0bfe14">Original (Recomendado)</option>
+        <option value="background-#ea5e8e-text-#000000-svg-#0bfe14">Papelwoi</option>
+        <option value="background-#000000-text-#ffffff-svg-#808080">Oscuro</option> 
+        <option value="background-#ffffff-text-#000000-svg-#808080">Blanco</option>
+        <option value="background-#000000-text-#ff0000-svg-#686868">Modo terror</option>
+        <option value="background-#8843F2-text-#ffffff-svg-#CCD1E4">Azul</option>
+      </select>
+    <label class="c" for="backgroundSelector">Color de Fondo Personalizado:</label>
+    <input class="c"  type="color" id="backgroundSelector" onchange="changeColors()">
+
+    <label class="c" for="textSelector">Color de Texto Personalizado:</label>
+    <input class="c" type="color" id="textSelector" onchange="changeColors()">
+
+    <label class="c" for="svgSelector">Color de SVG Personalizado:</label>
+    <input  class="c" type="color" id="svgSelector" onchange="changeColors()">
+
+</body>
+</html>
