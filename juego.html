@@ -1,13 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escoje un numero uwu</title>
-    <link rel="stylesheet" href="juego.css">
-    <script src="script.js"></script>
+    <title>Juego de Fidelidad - Papelwoi34</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .result {
+            font-weight: bold;
+            color: green;
+        }
+        .error {
+            font-weight: bold;
+            color: red;
+        }
+    </style>
 </head>
 <body>
-    
+
+<h1>¡Bienvenido al juego de fidelidad de Papelwoi34!</h1>
+<div id="game"></div>
+
+<script>
+    let subs = 37; // Cambia este número según sea necesario
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questions = [
+        { question: `¿Cuántos suscriptores tiene Papelwoi34?`, answer: subs, type: 'number' },
+        { question: `¿Cuál es el tema principal de Papelwoi34?`, options: ["Lo que sea", "Videojuegos", "Cocina", "Viajes"], answer: 0 },
+        { question: `¿Cuántos videos tiene Papelwoi34?`, answer: 65, type: 'number' },
+        { question: `¿Cuál es el mejor video de Papelwoi34?`, options: ["Squidgame", "Fugitivo", "Vualas", "Sigma Woi"], answer: 0 },
+        { question: `¿Cuál es el peor video de Papelwoi34?`, options: ["Fugitivo", "Unboxing navideño", "Patie a mi abuela", "Animación chafa"], answer: 0 },
+        { question: `¿En qué año se creó Papelwoi34?`, answer: 2024, type: 'number' },
+        { question: `¿Cuál es el nombre del creador de Papelwoi34?`, answer: "dante", type: 'text' },
+        { question: `¿Cuál es el video más visto de Papelwoi34?`, options: ["Caminando al refri", "Fugitivo", "La historia de Minecraft", "Fortnite"], answer: 0 },
+        { question: `¿Cuántos años tiene Papelwoi34?`, answer: 13, type: 'number' },
+        { question: `¿Qué tipo de vida lleva Papelwoi34?`, options: ["Pobresa", "Riqueza", "Aventura", "Normal"], answer: 0 },
+        { question: `¿Qué sexo tiene Papelwoi34?`, options: ["Gay", "Bisexual", "Hetero", "No tiene"], answer: 0 }
+    ];
+
+    function displayQuestion() {
+        const gameDiv = document.getElementById('game');
+        gameDiv.innerHTML = '';
+
+        if (currentQuestion < questions.length) {
+            const q = questions[currentQuestion];
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `<p>${q.question}</p>`;
+
+            if (q.options) {
+                q.options.forEach((option, index) => {
+                    questionDiv.innerHTML += `
+                        <label>
+                            <input type="radio" name="answer" value="${index}"> ${option}
+                        </label><br>
+                    `;
+                });
+            } else {
+                questionDiv.innerHTML += `
+                    <input type="${q.type || 'text'}" id="userAnswer">
+                `;
+            }
+
+            questionDiv.innerHTML += '<button onclick="checkAnswer()">Enviar</button>';
+            gameDiv.appendChild(questionDiv);
+        } else {
+            gameDiv.innerHTML = '<h2>¡Gracias por jugar!</h2>';
+        }
+    }
+
+    function checkAnswer() {
+        const q = questions[currentQuestion];
+        let userAnswer;
+
+        if (q.options) {
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (selectedOption) {
+                userAnswer = parseInt(selectedOption.value);
+            } else {
+                alert("Por favor, selecciona una respuesta.");
+                return;
+            }
+        } else {
+            userAnswer = document.getElementById('userAnswer').value;
+            if (q.type === 'number') userAnswer = parseInt(userAnswer);
+        }
+
+        if (userAnswer === q.answer) {
+            score++;
+            alert("¡Correcto! Eres un verdadero fan.");
+        } else {
+            alert("Incorrecto. ¡Has perdido!");
+            return;
+        }
+
+        currentQuestion++;
+        displayQuestion();
+    }
+
+    displayQuestion();
+</script>
+
 </body>
 </html>
